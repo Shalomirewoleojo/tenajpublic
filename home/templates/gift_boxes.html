@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block keywords %} gift boxes {% endblock %}
+{% block title %} Gift Boxes {% endblock %}
+{% block content %}
+
+    <div class="container-fluid products-header">
+        <div class="row">
+            <div class="col-lg-7 col-12 productlist">
+                <ul>
+                    <li><a href="{% url 'allproduct' %}">All products</a></li>
+                    <li><a href="{% url 'pendraw' %}">Pencil Drawings</a></li>
+                    <li><a href="{% url 'picframe' %}">Picture Framing</a></li>
+                    <li><a style="text-decoration: 2px solid white underline;" href="{% url 'giftbox' %}">Gift Boxes</a></li>
+                    <li><a href="{% url 'greetcard' %}">Greeting Cards</a></li>
+                </ul>
+            </div>
+            {% block productsearch %} {% include 'product_search.html' %} {% endblock %}
+        </div>
+    </div>
+
+    <div class="container products-first">
+        <h1>
+            <span class="purple">Gift</span>
+            <span class="orange">Boxes</span>
+        </h1>
+    </div>
+
+    <div class="container-fluid secondblock">
+        <div class="row allproducts">
+            {% for item in giftbox %}
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
+                <div class="services">
+                    <div class="write">
+                        <img src="{{ item.img.url }}" alt="">
+                        <h6 class="purple">
+                            {{ item.category }}
+                        </h6>
+                    </div>
+                    <div class="learnmore">
+                        <a class="white" href="{% url 'prod_det' item.id %}">View</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {% endblock %}
+
+    {% block endnote %}
+    <p>
+        <b>MONEY BACK GUARANTEE, ORDER NOW </b>
+    </p>
+    {% endblock %}

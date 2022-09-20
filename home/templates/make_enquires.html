@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block keywords %} enquiry {% endblock %}
+{% block title %} Enquires {% endblock %}
+{% block content %}
+
+    <div class="container-fluid enquires">
+        <div class="convo">
+            <!-- {% for item in random_product %}
+            {{ item.date_added }} <br>
+            {{ item.time_added }} <br>
+            {% endfor %} -->
+        {% if userconvo %}
+            {% for item in enquires %}
+                {% if item in adminconvo %}
+                <div class="adminconvo" style="margin-right: 3rem;">
+                    <p>
+                    {{ item.question|safe }}
+                    </p>
+                    <h6>{{ item.time_added }}</h6>
+                </div>
+                {% endif %}
+                {% if item in userconvo %}
+                <div class="userconvo" style="margin-left: 3rem;">
+                    <p>
+                        {{ item.question|safe }}
+                    </p>
+                    <h6>{{ item.time_added }}</h6>
+                </div>
+                {% endif %}
+            {% endfor %}         
+        {% else %} 
+            <div class="adminconvo">
+                <p>
+                Tell us what you would like to know and we will
+                make sure to answer you as soon and best as we
+                can.
+                </p>
+                <h6>10:45</h6>
+            </div>  
+            <div class="userconvo">
+                <p>
+                Tell us what you would like to know and we will
+                make sure to answer you as soon and best as we
+                can.
+                </p>
+                <h6>10:45</h6>
+            </div>
+        {% endif %}
+        </div>
+        <form action="{% url 'enquires' %}" method="POST">
+            {% csrf_token %}
+            <div class="formbut">
+                <input type="hidden" value="{{ user.id }}" name="sender" id="">
+                <input type="hidden" value="{{ ask.id }}" name="receiver" id="">
+                <textarea placeholder="What would you like to know?" name="question" maxlength="1000" id="" cols="30" rows="0"></textarea>
+                <button class="sendmess">                
+                    <i class='fa fa-send'></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container" data-aos="fade-up" data-aos-duration="1000"> <br> <br>
+        <h2 class="purple">
+            Frequently Asked Questions
+        </h2>
+        <div>
+            <h6 c>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit excepturi quaerat vitae deserunt maxime sapiente odio dicta placeat voluptatum, vel sint aliquam minima culpa perspiciatis quae officia, ut debitis ullam?</h5>
+            <p style="text-align: left;">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos error temporibus quis laudantium animi, consequatur voluptates laborum sunt corrupti nihil maiores reprehenderit illo aspernatur quae vero excepturi! Numquam, veritatis fuga.
+            </p> <br>
+            <h6 c>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit excepturi quaerat vitae deserunt maxime sapiente odio dicta placeat voluptatum, vel sint aliquam minima culpa perspiciatis quae officia, ut debitis ullam?</h5>
+            <p style="text-align: left;">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos error temporibus quis laudantium animi, consequatur voluptates laborum sunt corrupti nihil maiores reprehenderit illo aspernatur quae vero excepturi! Numquam, veritatis fuga.
+            </p> <br>
+            <h6 c>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit excepturi quaerat vitae deserunt maxime sapiente odio dicta placeat voluptatum, vel sint aliquam minima culpa perspiciatis quae officia, ut debitis ullam?</h5>
+            <p style="text-align: left;">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos error temporibus quis laudantium animi, consequatur voluptates laborum sunt corrupti nihil maiores reprehenderit illo aspernatur quae vero excepturi! Numquam, veritatis fuga.
+            </p> <br>
+        </div>
+    </div>
+{% endblock %}

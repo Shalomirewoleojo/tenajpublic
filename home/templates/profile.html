@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block keywords %} 
+order details, account
+{% endblock keywords %}
+{% block title %} Account {% endblock %}
+{% block content %}
+
+<style>
+    @media (max-width: 767px) {
+    .account .profile input[type='email']{
+        width: 100%;
+    }
+
+    .account .profile button{
+        width: 0%;
+    }
+
+    .account td:first-child{
+        width: 100%;
+    }
+    
+    .account td:nth-child(2){
+        width: 100%;
+    }
+}
+</style>
+
+{% if messages %}
+    {% for message in messages  %}
+        <div  class="alert alert-success alert-{{message.tags}}" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message|safe }}
+        </div>									  
+    {% endfor %}								  
+{% endif %}
+    <div class="container-fluid secondblock account checkout">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <form action="{% url 'update' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="write">
+                            <h4 class="purple">
+                                {{ client.username }}
+                            </h4>
+                            <table class="profile">
+                                <tr>
+                                    <td>First Name</td>
+                                    <td><input type="text" name="first_name" value="{{ client.first_name }}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name</td>
+                                    <td><input type="text" name="last_name" value="{{ client.last_name }}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Email Address</td>
+                                    <td><input type="email" id="field" name="username" value="{{ client.username }}"></td>
+                                    <input type="hidden" id="result" name="email" value="{{ client.email }}">
+                                </tr>
+                                <!-- <tr>
+                                    <td>Order Destination Address</td>
+                                    <td><input type="text" name="address" value="{{ client.address }}"></td>
+                                </tr> -->
+                            </table>
+                        </div>
+                        <div class="orderbut">
+                            <div class="learnmore">
+                                <a class="white" href="{% url 'upchange' %}">Change Password</a>
+                            </div>
+                            <button style="font-weight:lighter" class="learnmore white subbut">Update Profile</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- {% if order %}
+            <div class="col-lg-10 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <form action="">
+                        <div class="write">
+                            <h4 class="purple">
+                                Order Details
+                            </h4>
+                            <table>
+                                <tr class="products-header">
+                                    <th class="white">Item</th>
+                                    <th class="white">Quantity</th>
+                                    <th class="white">Size</th>
+                                    <th class="white">Amount</th>
+                                    <th class="white" >Item Recieved</th>
+                                </tr>
+                                {% for item in order %}
+                                    <tr>
+                                        <td>{{ item.product.category }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>{{ item.size }}</td>
+                                        <td><i class='fa-solid fa-naira-sign'></i>{{ item.price | floatformat:0 | intcomma }}</td>
+                                        <td>
+                                            <form action="">
+                                                <input type="hidden" name="" value="True" id="">
+                                                <button style="width: 5px; height: 15px;" type="submit"></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endif %} -->
+        </div>
+        <div class="learnmore">
+            <a class="white" href="{% url 'logout' %}">Log Out</a>
+        </div>
+    </div>
+
+{% endblock %}

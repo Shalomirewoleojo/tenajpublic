@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block keywords %} 
+order details, account
+{% endblock keywords %}
+{% block title %} Account {% endblock %}
+{% block content %}
+
+<style>
+    .services .write {
+        height: 28rem;
+    }
+</style>
+{% if user.id is None %}
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-{{message.tags}}" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="container-fluid secondblock account">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <form action="{% url 'account' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="write forgot">
+                            <h4 class="purple">
+                                Login
+                            </h4>
+                            <div class="forminputs">
+                                Email Address: <br>
+                                <input type="email" name="username" id=""> <br>
+                                Password: <br>
+                                <input type="password" name="password" id=""> <br>
+                            </div>
+                        </div>
+                        <button class="learnmore white subbut">
+                            Login
+                        </button>
+                        <a href="{% url 'reset_password' %}" class="purple">Forgot Password?</a>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <form action="{% url 'register' %}"  method="POST">
+                        {% csrf_token %}
+                        <div class="write">
+                            <h4 class="purple">
+                                Register
+                            </h4>
+                            <div class="forminputs">
+                                Email Address: <br>
+                                <input type="email" name="username" id="field"> <br>
+                                <!-- Email Address: <br> -->
+                                <input type="hidden" name="email" id="result">
+                                First Name: <br>
+                                <input type="text" name="first_name" id=""> <br>
+                                Last Name: <br>
+                                <input type="text" name="last_name" id=""> <br>
+                                Password: <br>
+                                <input type="password" name="password1" id=""> <br>
+                                Confirm Password: <br>
+                                <input type="password" name="password2" id=""> <br>
+                            </div>
+                        </div>
+                        <button class="learnmore white subbut">
+                            Register
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block keywords %} cart, order {% endblock %}
+{% block title %} Cart {% endblock %}
+{% block content %}
+
+<style>
+    @media (max-width: 767px) {
+    
+        .account td:first-child{
+            width: 80%;
+        }
+        
+        .account td:nth-child(2){
+            width: 20%;
+        }
+    }
+</style>
+
+    <div class="container-fluid secondblock account checkout">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-{{message.tags}}" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <form action="">
+                        <div class="write">
+                            <h4 class="purple">
+                                Order Summary
+                            </h4>
+                            <table>
+                                <tr class="products-header">
+                                    <th class="white">Item</th>
+                                    <th class="white">Quantity</th>
+                                    <th class="white">Size</th>
+                                    <th class="white">Amount</th>
+                                </tr>
+                                {% for item in prodchecker %}
+                                {% if item.product.category == 'Picture Framing' or item.product.category == 'Pencil Drawings' %}
+                                <tr>
+                                    <td>{{ item.product.category }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>{{ item.size }}</td>
+                                    <td><i class='fa-solid fa-naira-sign'></i>{{ item.amount|floatformat:0|intcomma }}</td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </table>
+                            <div class="learnmore white">
+                                vat <i style="font-size:small" class='fa-solid fa-naira-sign'>{{ vat|floatformat:0|intcomma }}</i> <br>
+                                <tr>
+                                    <td>Total</td>
+                                <td><i class='fa-solid fa-naira-sign'>{{ total|floatformat:0|intcomma }}</i></td>
+                                </tr>
+                            </div>
+                        </div><br>
+                        <p>
+                            Only items under the categories 'Pencil Drawings'
+                            and 'Picture Framing' can be preordered. <br>
+                            Other items will be ordered after necessary communications
+                            via email have been made.
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12 ">
+                <div class="checkservice services" data-aos="flip-left">
+                    <form action="{% url 'order:placeorder' %}" method="POST">
+                    {% csrf_token %}
+                        <div class="write">
+                            <h4 class="purple">
+                                Order Details
+                            </h4>
+                            <div class="forminputs">
+                                First Name: <br>
+                                <input type="text" name="first_name" value="{{ client.first_name }}" id=""> <br>
+                                Last Name: <br>
+                                <input type="text" name="last_name" value="{{ client.last_name }}" id=""> <br>
+                                Phone Number: <br>
+                                <input type="number" name="phone" value="{{ client2.phone }}" id=""> <br>
+                                Address: <br>
+                                <input type="text" name="address" value="{{ client2.address }}" id=""> <br>
+                                City: <br>
+                                <input type="text" name="city" value="{{ client2.city }}" id=""> <br>
+                                State: <br>
+                                <input type="text" name="state" value="{{ client2.state }}" id=""> <br>
+                                <input type="hidden" name="amount" value="{{total}}">
+                                <input type="hidden" name="order_number" value="{{order_code}}">
+                            </div>
+                        </div>
+                        <button class="learnmore white subbut">
+                            Proceed to Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+    
+    {% block endnote %}
+    {% endblock %}

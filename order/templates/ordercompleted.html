@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block keywords %} cart, order {% endblock %}
+{% block title %} Cart {% endblock %}
+{% block content %}
+
+    <div class="container-fluid secondblock cart">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="emptycart">
+                        <h4>Dear <span class="purple">{{profile.user.first_name}} {{profile.user.last_name}},</span></h4>
+                        <h5>Your Order is Completed</h5>
+                        <p>Thank You for your patronage</p>
+                        <div class="learnmore">
+                            <a class="white" href="{% url 'allproduct' %}">Shop More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block endnote %}
+{% endblock %}

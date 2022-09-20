@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block keywords %} 
+beginner, Intermediate, Advanced, training 
+{% endblock keywords %}
+{% block title %} My Training {% endblock %}
+{% block content %}
+
+    <div class="container-fluid" style="padding: 0; background: rgba(143, 115, 115, 0.322);">
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <!-- Indicators if needed else dont add -->
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                {% for item in carousel %}
+                <li data-target="#demo" data-slide-to="1"></li>
+                {% endfor %}
+            </ul>
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ training.carousel.url }}">
+                    <div class="carousel-caption">
+                    
+                    </div>
+                </div>
+                {% for item in carousel %}
+                <div class="carousel-item">
+                    <img src="{{ item.carousel.url }}">
+                    <div class="carousel-caption">
+                    
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+          <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <!-- <span><i class="fa fa-chevron-right fa-2x" aria-hidden="true"></i></span> -->
+            </a>
+        </div>
+    </div>
+
+    <div class="container training">
+        <div class="row">
+            <div class="col-lg-5 col-12">
+                <div class="speech1" data-aos="fade-up" data-aos-duration="1000">
+                    <h3 class="purple">
+                        Dear friend, 
+                        
+                    </h3>
+                    <p>
+                        My name is Janet Adeoye and I am the founder of Tenaj Art and Craft; which has been in existence for FIVE years. <br> 
+                        I have trained people to become expert in box making. <br>
+                        
+                        Even as an unemployed, I want to show you how you can start your business from the scratch and make huge profits within a short period of time. <br>
+                        As a business owner, I will show you how to package your business, create neat boxes with different designs, that will make your brand unique and stand out. <br>
+                    </p>
+                </div>
+                <div class="speech1" data-aos="fade-up" data-aos-duration="1000">
+                    <h3 class="orange">
+                        What do you stand to gain?
+                    </h3>
+                    <p>
+                        •Say goodbye to salary and make money on packaging business <br>
+                        •Understand the intricacies of measurement <br>
+                        •How to make simple box<br>
+                        •How to make cake box/Small chops box<br>
+                        •How to make shoe box<br>
+                        •How to make gift box for valentine, birthday etc<br>
+                        •How to make Explosion/memory box<br>
+                        •How to make paper bags<br>
+                        •Free ebooks to guide your learning process<br>
+                        •Videos showing each process for remembrance <br>
+                        •Free life time consultation on any issue<br>
+                        •Bonus free eBook with picture guidelines on how to make boxes (material is worth 5,000) <br>
+                        •Certificate after completion.<br>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-7 col-12">
+                <div class="training-vid" data-aos="fade-up" data-aos-duration="1000">
+                    <video controls autoplay>
+                        <source src="{{ training.t_video.url }}" type="video/ogg">
+                        <source src="{{ training.t_video.url }}" type="video/mp4">
+                        <source src="{{ training.t_video.url }}" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid secondblock">
+        <center>
+            <h3 class="white">SAY GOODBYE TO SALARY <br> MAKE MONEY IN PACKAGING BUSINESS</h3> <br>
+        </center>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-sm-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="write">
+                        <img src="{{ training.beginners.url }}" alt="">
+                        <h4 class="purple">
+                            Beginners Level
+                        </h4>
+                        <p>
+                        </p>
+                    </div>
+                    <!-- <div class="learnmore">
+                        <a class="white" href="">N25,000</a>
+                    </div> -->
+                    <form action="{% url 'order:single_purchase' %}" method="POST">
+                    {% csrf_token %}
+                        <input type="hidden" name="course" value="Beginners Level" id="">
+                        <input type="hidden" value="{{ prices.price1 }}" name="price" id="">
+                        <button class="learnmore white subbut"><i class='fa-solid fa-naira-sign'></i>{{ prices.price1 | floatformat:0 | intcomma }}</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="write">
+                        <img src="{{ training.intermediate.url }}" alt="">
+                        <h4 class="purple">
+                            Intermediate Level
+                        </h4>
+                        <p>
+                        </p>
+                    </div>
+                    <!-- <div class="learnmore">
+                        <a class="white" href="">N30,000</a>
+                    </div> -->
+                    <form action="{% url 'order:single_purchase' %}" method="POST">
+                    {% csrf_token %}
+                        <input type="hidden" value="Intermediate Level" name="course" id="">
+                        <input type="hidden" value="{{ prices.price2 }}" name="price" id="">
+                        <button class="learnmore white subbut"><i class='fa-solid fa-naira-sign'></i>{{ prices.price2 | floatformat:0 | intcomma }}</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="write">
+                        <img src="{{ training.advanced.url }}" alt="">
+                        <h4 class="purple">
+                            Advanced Level
+                        </h4>
+                        <p>
+                        </p>
+                    </div>
+                    <!-- <div class="learnmore">
+                        <a class="white" href="">N20,000</a>
+                    </div> -->
+                    <form action="{% url 'order:single_purchase' %}" method="POST">
+                    {% csrf_token %}
+                        <input type="hidden" value="Advanced Level" name="course" id="">
+                        <input type="hidden" value="{{ prices.price3 }}" name="price" id="">
+                        <button class="learnmore white subbut"><i class='fa-solid fa-naira-sign'></i>{{ prices.price3 | floatformat:0 | intcomma }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <p class="white" style="text-align: center; font-weight: bold;">
+            After the training, if you don’t learn anything or you feel you’ve been cheated in anyway. <br>
+            Message us and we will return your money IN FULL. <br>
+            Yes! You heard us right. We are fully confident in what we offer. <br>
+        </p>
+    </div>
+
+{% endblock %}
+
+{% block endnote %} 
+<p>
+    <b>REGISTER FOR THE TRAINING </b>
+</p>
+{% endblock %}

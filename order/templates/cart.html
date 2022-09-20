@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block keywords %} cart, order {% endblock %}
+{% block title %} Cart {% endblock %}
+{% block content %}
+
+{% if not prodchecker %}
+    <div class="container-fluid secondblock cart">
+        <div class="row justify-content-center">
+            <div class="col-lg-11 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="emptycart">
+                        <span class="material-icons purple">
+                            shopping_cart
+                        </span>
+                        <p>
+                            <b>No item in cart yet</b> <br>
+                            Your lover deserves a token of love as gifts
+                        </p>
+                        <div class="learnmore">
+                            <a class="white" href="{% url 'allproduct' %}">Start Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </div>
+{% else %}
+    <div class="container-fluid cart secondblock">
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success alert-{{message.tags}}" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="write">
+                        <h4 class="purple">
+                            Cart({{ prodchecker.count }})
+                        </h4>
+                        <table>
+                            <tr class="products-header">
+                                <th class="white">Item Specifications</th>
+                                <th class="white">Amount <br> ( <i class='fa-solid fa-naira-sign'></i> )</th>
+                            </tr>
+                            {% for item in prodchecker %}
+                            <tr>
+                                <td>
+                                    <img src="{{ item.product.img.url }}" alt="">
+                                    <div>
+                                        <p><b>{{ item.product.category }}</b></p>
+                                        Size: <b>{{ item.size }}</b>
+                                        <!-- <select name="size" id="">
+                                            <option value="">8 by 10 </option>
+                                            <option value="">12 by 16 </option>
+                                            <option value="">16 by 20 </option>
+                                            <option value="">20 by 24 </option>
+                                            <option value="">24 by 36 </option>
+                                        </select>  -->
+                                        <br>
+                                        <form action="{% url 'order:updatequantity' %}" method="post">
+                                        {% csrf_token %}
+                                            Quantity:<input type="number" name="itemquantity" id="" value="{{ item.quantity }}" min="1"> <br> <br>
+                                            <button style="padding: 0;" class="learnmore white subbut">Update</button>
+                                            <input type="hidden" name="itemid" value="{{ item.id }}">
+                                        </form>
+                                        <a class="red" href="{% url 'order:deletefromcart' item.id %}"><b>remove</b></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{ item.amount|floatformat:0|intcomma }}
+                                    </p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table> <br>
+                        <div class="learnmore white">
+                            vat <i style="font-size:small" class='fa-solid fa-naira-sign'>{{ vat|floatformat:0|intcomma }}</i> <br>
+                            <tr>
+                                <td>Total</td>
+                                <td><i class='fa-solid fa-naira-sign'>{{ total|floatformat:0|intcomma }}</i></td>
+                            </tr>
+                        </div>
+                    </div>
+                    <div class="orderbut">
+                        <div class="learnmore">
+                            <a class="white" href="{% url 'allproduct' %}">Shop More</a>
+                        </div>
+                        <div class="learnmore">
+                            <a class="white" href="{% url 'order:checkout' %}">Check Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </div> 
+
+{% endif %}
+
+{% endblock %}
+
+{% block endnote %}
+{% endblock %}

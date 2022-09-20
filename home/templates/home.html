@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block keywords %} 
+gift box, pencil drawing, picture framing, greeting card, training 
+{% endblock keywords %}
+{% block title %} Home {% endblock %}
+{% block content %}
+
+    <div class="container-fluid firstblock">
+        <div class="row" >
+            <div data-aos="fade-up" data-aos-duration="1000" class="col-lg-6 col-md-6 col-12 expertise" >
+                <h2>
+                    <span class="orange">Why choose</span> <br>
+                    <span class="purple">Tenaj Art and Craft?</span>
+                </h2>
+                <p class="gray">
+                    Our vast and knowledge of the world of packaging and human relations allows us to expertly train, advise and create beautiful designs of boxes and Portraits. Our art and Crafts has been crafted to deal with the matters of every individual heart.
+                </p>        
+            </div>
+            <div data-aos="fade-up" data-aos-duration="1000" class="col-lg-6 col-md-6 col-12 firstimg">
+                <!-- <img src="media/t_white_giftbox_with_gold_ribbon.jpeg" alt=""> -->
+                <img src="{{ home_img.first_img.url }}" alt="">
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="container-fluid secondblock">
+        <center>
+            <h3 class="white">Our Services</h3> <br>
+        </center>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="write">
+                        <img src="{{ home_img.pencil_drawing.url }}" alt="">
+                        <h4 class="purple">
+                            Pencil Drawing
+                        </h4>
+                        <p>
+                            We deliver pencil drawing (portrait) that matches the taste of our clients.
+                        </p>
+                    </div>
+                    <div class="learnmore">
+                        <a class="white" href="pencil_drawing.html">See More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="write">
+                        <img src="{{ home_img.picture_framing.url }}" alt="">
+                        <h4 class="purple">
+                            Picture Framing
+                        </h4>
+                        <p>
+                            We deliver picture frames that matches the taste of our clients.
+                        </p>
+                    </div>
+                    <div class="learnmore">
+                        <a class="white" href="pencil_drawing.html">See More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="write">
+                        <img src="{{ home_img.gift_box.url }}" alt="">
+                        <h4 class="purple">
+                            Gift Box
+                        </h4>
+                        <p>
+                            We make packaging boxes (ranging from shoe box, gift box, memories box an so on) to suit your taste.
+                        </p>
+                    </div>
+                    <div class="learnmore">
+                        <a class="white" href="gift_boxes.html">See More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="write">
+                        <img src="{{ home_img.greeting_card.url }}" alt="">
+                        <h4 class="purple">
+                            Greeting Card
+                        </h4>
+                        <p>
+                            We craft hand-made greeting cards and love notes to express your inner world.
+                        </p>
+                    </div>
+                    <div class="learnmore">
+                        <a class="white" href="greeting_cards.html">See More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 ">
+                <div class="services" data-aos="flip-left">
+                    <div class="write">
+                        <img src="{{ home_img.training.url }}" alt="">
+                        <h4 class="purple">
+                            Training
+                        </h4>
+                        <p>
+                            We train individuals on how to brand their products using packaging papers and box.
+                        </p>
+                    </div>
+                    <div class="learnmore">
+                        <a class="white" href="{% url 'training' %}">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container thirdblock">
+        <div class="row about">
+            <div class="col-lg-4 col-12">
+                <img src="{{ home_img.appears.url }}" alt="">
+            </div>
+            <div class="col-lg-8 col-12">
+                <div class="purple">
+                    <h3> ABOUT US </h3>
+                </div>
+                <p>
+                    Dear friend, <br>
+                My name is Janet Adeoye and I am the founder of Tenaj Art and Craft; which has been in existence for FIVE years.
+                I have trained people to become expert in box (both physical and online training).
+                </p>
+                <h5 class="orange">
+                    INTEGRITY
+                </h5>
+                <p>  
+                    We place integrity of our clients and our own name first. Our communication are straightforward, our intentions are pure and our actions are honest. That is why we provide money back guarantee on all our product and services- we are that confident in what we do.
+                </p>
+                <h5 class="orange">
+                    TEAMWORK
+                </h5>
+                <p>
+                    Our team of professionals works together seamlessly o achieve the address of our clients heart.
+                </p>
+                <h5 class="orange">
+                    LOWER FEES AND EASY TRANSACTION
+                </h5>
+                <p>
+                    Our fees are more reasonable for a quality product compared to shipping them from abroad.
+                </p>
+                <h5 class="orange">
+                    OUR SUCCESS
+                </h5>
+                <p>
+                    We are strategic and focus on dealing with the matters of the heart of our clients. Check our reviews and see what clients have to say about us.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid fourthblock">
+        <center>
+            <h3 class="white">Reviews</h3>
+        </center>
+        <div class="row services">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="zoom-in" data-aos-duration="1000">
+                <img src="{{ home_img.review1.url }}" alt="">
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="zoom-in" data-aos-duration="1000">
+                <img src="{{ home_img.review2.url }}" alt="">
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="zoom-in" data-aos-duration="1000">
+                <img src="{{ home_img.review3.url }}" alt="">
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-aos="zoom-in" data-aos-duration="1000">
+                <img src="{{ home_img.review4.url }}" alt="">
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

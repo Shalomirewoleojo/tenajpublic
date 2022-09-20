@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block keywords %} products, details {% endblock %}
+{% block title %} Product Details {% endblock %}
+{% block content %}
+
+    <div class="container prodets">
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success alert-{{message.tags}}" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12" data-aos="fade-up" data-aos-duration="1000">
+                <img src="{{ prod.img.url }}" alt="">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="purple">
+                    {{ prod.category }}
+                </h1>
+                <form action="{% url 'order:addtoshopcart' %}" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <h5 class="orange">Sizes</h5>
+                        {% if prod in giftbox %}
+                        <input style="display: none;" id="price" type="radio" name="price" value="{{ price.price1 }}">
+                        <input type="radio" name="size" id="size" value="5"> 
+                        <b> 5 - <i class='fa-solid fa-naira-sign'></i>{{ price.price1 | floatformat:0 | intcomma }} <br></b>
+                        <span class="orange">Things it can contain</span>- hair products, pen ,perfume etc
+                        <input style="display: none;" id="price1" type="radio" name="price" value="{{ price.price2 }}">
+                        <br><input type="radio" name="size" id="size1" value="7">
+                        <b>7 - <i class='fa-solid fa-naira-sign'></i>{{ price.price2 | floatformat:0 | intcomma }} <br></b>
+                        <span class="orange">Things it can contain</span>- mug, can or bottle drink, chocolate, greeting cards, cube,perfume, small teddy etc
+                        <input style="display: none;" id="price2" type="radio" name="price" value="{{ price.price3 }}">
+                        <br><input type="radio" name="size" id="size2" value="8-10">
+                        <b>8-10 - <i class='fa-solid fa-naira-sign'></i>{{ price.price3 | floatformat:0 | intcomma }} <br></b>
+                        <span class="orange">Things it can contain</span>- shoes of size 37, chocolate, greeting cards, cube, clothes etc
+                        <input style="display: none;" id="price3" type="radio" name="price" value="{{ price.price4 }}">
+                        <br><input type="radio" name="size" id="size3" value="13-14">
+                        <b>13-14 - <i class='fa-solid fa-naira-sign'></i>{{ price.price4 | floatformat:0 | intcomma }} <br></b>
+                        <span class="orange">Things it can contain</span>- wine, mug, chocolate, greeting cards, bag, cube,perfume, teddy bear etc
+                        <input style="display: none;" id="price4" type="radio" name="price" value="{{ price.price5 }}">
+                        <br><input type="radio" name="size" id="size4" value="16">
+                        <b>16 - <i class='fa-solid fa-naira-sign'></i>{{ price.price5 | floatformat:0 | intcomma }}</b>
+                        {% endif %}
+
+                        {% if prod in membox %}
+                        <input style="display: none;" id="price" type="radio" name="price" value="{{ price.price1 }}">
+                        <input type="radio" name="size" id="size" value="8 by 8">
+                        <b> 8 by 8 - <i class='fa-solid fa-naira-sign'></i>{{ price.price6 | floatformat:0 | intcomma }} <br></b>
+                        <input style="display: none;" id="price1" type="radio" name="price" value="{{ price.price2 }}">
+                        <br><input type="radio" name="size" id="size1" value="6 by 6">
+                        <b> 6 by 6 - <i class='fa-solid fa-naira-sign'></i>{{ price.price6 | floatformat:0 | intcomma }} <br></b>
+                        <input style="display: none;" id="price2" type="radio" name="price" value="{{ price.price3 }}">
+                        <br><input type="radio" name="size" id="size2" value="4 by 4">
+                        <b> 4 by 4 - <i class='fa-solid fa-naira-sign'></i> {{ price.price6 | floatformat:0 | intcomma }}<br></b>
+                        <span class="orange">Things it can contain</span>- pictures, chocolate, greeting cards.
+                        {% endif %}
+
+                        {% if prod in picframe %}
+                        <input style="display: none;" id="price" type="radio" name="price" value="{{ price.price1 }}">
+                        <input type="radio" name="size" id="size" value="8 by 10">
+                        <b>8 by 10 - <i class='fa-solid fa-naira-sign'></i>{{ price.price1 | floatformat:0 | intcomma }} <br></b>
+                        <input style="display: none;" id="price1" type="radio" name="price" value="{{ price.price2 }}">
+                        <br><input type="radio" name="size" id="size1" value="12 by 16">
+                        <b>12 by 16 - <i class='fa-solid fa-naira-sign'></i>{{ price.price2 | floatformat:0 | intcomma }} <br></b>
+                        <input style="display: none;" id="price2" type="radio" name="price" value="{{ price.price3 }}">
+                        <br><input type="radio" name="size" id="size2" value="16 by 20">
+                        <b>16 by 20 - <i class='fa-solid fa-naira-sign'></i>{{ price.price3 | floatformat:0 | intcomma }} <br></b>
+                        <input style="display: none;" id="price3" type="radio" name="price" value="{{ price.price4 }}">
+                        <br><input type="radio" name="size" id="size3" value="20 by 24">
+                        <b>20 by 24 - <i class='fa-solid fa-naira-sign'></i>{{ price.price4 | floatformat:0 | intcomma }} <br></b>
+                        <input style="display: none;" id="price4" type="radio" name="price" value="{{ price.price5 }}">
+                        <br><input type="radio" name="size" id="size4" value="24 by 36">
+                        <b>24 by 36 - <i class='fa-solid fa-naira-sign'></i>{{ price.price5 | floatformat:0 | intcomma }} <br></b>
+                        {% endif %}
+
+                        {% if prod in greetcard %}
+                        <input style="display: none;" id="price" type="radio" name="price" value="{{ price_avg }}">
+                        <input type="radio" name="size" id="size" value="greeting card">
+                        <b>Greeting Card - <i class='fa-solid fa-naira-sign'></i>{{ price.price1 | floatformat:0 | intcomma }} 
+                            - <i class='fa-solid fa-naira-sign'></i>{{ price.price2 | floatformat:0 | intcomma }} <br></b>
+                            <input style="display: none;" id="price1" type="radio" name="price" value="{{ price.price2 }}">
+                        <br><input type="radio" name="size" id="size1" value="love letter">
+                        <b>Love Letter - <i class='fa-solid fa-naira-sign'></i>{{ price.price3 | floatformat:0 | intcomma }} <br></b>
+                        {% endif %}
+
+                        {% if prod in penprod %}
+                        <input style="display: none;" id="price" type="radio" name="price" value="{{ price.price1 }}">
+                        <input type="radio" name="size" id="size" value="8 by 10">
+                        <b>8 by 10 - <i class='fa-solid fa-naira-sign'></i>{{ price.price1 | floatformat:0 | intcomma }} <br></b>
+                        <input style="display: none;" id="price1" type="radio" name="price" value="{{ price.price2 }}">
+                        <br><input type="radio" name="size" id="size1" value="12 by 16">
+                        <b>12 by 16 - <i class='fa-solid fa-naira-sign'></i>{{ price.price2 | floatformat:0 | intcomma }} <br></b>
+                        <input style="display: none;" id="price2" type="radio" name="price" value="{{ price.price3 }}">
+                        <br><input type="radio" name="size" id="size2" value="16 by 20">
+                        <b>16 by 20 - <i class='fa-solid fa-naira-sign'></i>{{ price.price3 | floatformat:0 | intcomma }} <br></b>
+                        <input style="display: none;" id="price3" type="radio" name="price" value="{{ price.price4 }}">
+                        <br><input type="radio" name="size" id="size3" value="20 by 24">
+                        <b>20 by 24 - <i class='fa-solid fa-naira-sign'></i>{{ price.price4 | floatformat:0 | intcomma }} <br></b>
+                        <input style="display: none;" id="price4" type="radio" name="price" value="{{ price.price5 }}">
+                        <br><input type="radio" name="size" id="size4" value="24 by 36">
+                        <b>24 by 36 - <i class='fa-solid fa-naira-sign'></i>{{ price.price5 | floatformat:0 | intcomma }} <br></b>
+                        {% endif %}
+                    </div>
+                    <input type="hidden" name="prodid" value="{{ prod.id }}">
+                    <div> <br>
+                        <h5 class="orange">Quantity</h5>
+                        <input type="number" name="quantity" id="" value="1" min="1">
+                    </div>
+                    <div> <br>
+                        <h5 class="orange">Specifications</h5>
+                        <textarea placeholder="I'll like it a bit more..." name="specifications" id="" cols="30" rows="2" maxlength="1000"></textarea>
+                    </div>
+                    <div class="orderbut">
+                        <button class="learnmore subbut white">
+                            Add to Cart
+                        </button>
+                    </form>
+                        <!-- <button class="learnmore subbut white">
+                            Order Now
+                        </button> -->
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container products-first">
+        <div class="row">
+            <h2>
+                <span class="purple">More </span>
+                <span class="orange">like </span>
+                <span class="purple">this </span>
+            </h2>
+            <!-- <div class="learnmore">
+                <a class="white" href="gift_boxes.html">View More</a>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="container-fluid secondblock">
+        <div class="row allproducts">
+            {% for item in more %}
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 ">
+                <div class="services">
+                    <div class="write">
+                        <img src="{{ item.img.url }}" alt="">
+                        <h6 class="purple">
+                            {{ item.category|safe }}
+                        </h6>
+                    </div>
+                    <div class="learnmore">
+                        <a class="white" href="{% url 'prod_det' item.id %}">View</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+    {% endblock %}
+
+    {% block endnote %}
+    <p>
+        <b>MONEY BACK GUARANTEE, ORDER NOW </b>
+    </p>
+    {% endblock %}

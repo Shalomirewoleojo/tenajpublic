@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+{% load static %}
+{% load humanize %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>            
+    <meta name="keywords" content="{% block keywords %} {% endblock keywords %}"> 
+
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '' %}css/tenaj.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'media/favicon-96x96.png' %}">    
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row header">
+            <span onclick="menu()" id="menu" class="material-icons col-2">
+                menu
+            </span>
+            <div class="col-2 col-md-3 ">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'media/t_logo.jpeg' %}" alt="">
+                </a>
+            </div>
+            <div class="col-lg-9 col-12 array">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'training' %}">My Training</a></li>
+                    <li id="drop"><a href="{% url 'allproduct' %}">Products
+                        <!-- <i class="nav-arrow fa fa-angle-down" aria-hidden="true" role="img"></i> -->
+                        </a>
+                        <!-- <div class="down">
+                            <ul>
+                                <li><a href="">Pencil Drawings</a></li>
+                                <li><a href="">Gift Boxes</a></li>
+                                <li><a href="">Greeting Cards</a></li>
+                            </ul>
+                        </div> -->
+                    </li>
+                    <li><a href="{% url 'enquires' %}">Make Enquires</a></li>
+                    <li><a href="{% url 'order:cart' %}">Cart
+                        <!-- <span class="material-icons">
+                            shopping_cart
+                        </span> -->
+                    </a></li>
+                    {% if user.id is None %}
+                    <li><a href="{% url 'account' %}">Account</a></li>
+                    {% endif %}
+                    {% if user.id is not None %}
+                    <li><a href="{% url 'profile' %}">{{ user.username }}'s Profile</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% block content %} {% endblock %}
+
+    <div class="container footer">
+        {% block endnote %} {% endblock %}
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-sm-6 col-12">
+                <h6 class="orange">
+                    SOCIAL MEDIA PAGES
+                </h6>
+                <a href="https://www.instagram.com/tenaj_art_craft">
+                    <i class='fa fa-instagram'></i>
+                </a>
+                <a href="https://twitter.com/TenajArtCraft">
+                    <i class='fa fa-twitter'></i>
+                </a>
+                <a href="https://youtube.com/channel/UCWgVDmQz0xn_E9nm3igc92w">
+                    <i class='fa fa-youtube-play'></i>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12">
+                <h6 class="purple">
+                    ADDRESS
+                </h6>
+                <address>
+                    Tombia Area, Yenagoa, Bayelsa State
+                </address>
+                <a href="https://goo.gl/maps/5fHv4NdhQwvRbhFn9">
+                    <i class='fa fa-map-marker'></i>                
+                </a>          
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12">
+                <h6 class="orange">
+                    CONTACT US
+                </h6>
+                <a href="https://wa.me/+2348165573297">
+                    <i class='fa fa-whatsapp'></i>
+                </a> 
+                <!-- +2348165573297  <br> -->
+                <a href="https://www.facebook.com/adeoye.oluwajuwonlojanet">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a href="https://telegram.me/Tenaj_Art_Craft">
+                    <i class='fa fa-telegram'></i>
+                </a>
+                <a href="tel:+2348165573297">
+                    <i class='fa fa-phone'></i>
+                </a>
+                <!-- +2348165573297 <br> -->
+                <a href="mailto:tenajcreativeart@gmail.com">
+                    <i class='fa fa-envelope'></i>
+                </a>
+                <!-- tenajcreativeart@gmail.com <br> -->
+                <a href="https://www.linkedin.com/in/oluwajuwonlo-adeoye-009328162">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+                <!-- oluwajuwonlo-adeoye-009328162 -->
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        document.getElementById("field").value =
+        document.getElementById("result").value
+    </script>
+    <script type="text/javascript">
+        $("#field").keyup(function(){
+            update();
+        })
+
+        function update() {
+            $("#result").val($('#field').val());
+        }
+    </script>
+
+    <script>
+        const size = document.getElementById('size');
+        const price = document.getElementById('price');
+        const size1 = document.getElementById('size1');
+        const price1 = document.getElementById('price1');
+        const size2 = document.getElementById('size2');
+        const price2 = document.getElementById('price2');
+        const size3 = document.getElementById('size3');
+        const price3 = document.getElementById('price3');
+        const size4 = document.getElementById('size4');
+        const price4 = document.getElementById('price4');
+
+        size.addEventListener('change', () => {
+            if(size.checked === true) {
+                price.checked = true;
+            }
+        })
+        size1.addEventListener('change', () => {
+            if(size1.checked === true) {
+                price1.checked = true;
+            }
+        })
+        size2.addEventListener('change', () => {
+            if(size2.checked === true) {
+                price2.checked = true;
+            }
+        })
+        size3.addEventListener('change', () => {
+            if(size3.checked === true) {
+                price3.checked = true;
+            }
+        })
+        size4.addEventListener('change', () => {
+            if(size4.checked === true) {
+                price4.checked = true;
+            }
+        })
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="{% static 'js/tenaj.js' %}"></script>
+</body>
+</html>
